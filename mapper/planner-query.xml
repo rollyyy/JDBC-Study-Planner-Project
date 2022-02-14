@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<!-- 1. 학생 등록 -->
+<entry key="insertStudent">
+	INSERT
+	  INTO STUDENT A
+	(
+	  A.STUDENT_NO
+	, A.STUDENT_NAME
+	, A.PHONE
+	)
+	VALUES
+	(
+	  SEQ_STUDENT_NO.NEXTVAL
+	, ?
+	, ?
+	)
+</entry>
+
+<!-- 2. 모든 학생 조회 -->
+<entry key="selectAllStudent">
+	SELECT
+	      S.*
+	 FROM STUDENT S
+</entry>
+
+<!-- 3. 과목 등록 -->
+<entry key="insertClass">
+	INSERT
+	  INTO CLASS A
+	(
+	  A.CLASS_CODE
+	, A.CLASS_NAME
+	)
+	VALUES
+	(
+	  CLASS_CODE.NEXTVAL
+	, ?
+	)
+</entry>
+
+<!-- 4. 모든 과목 조회 -->
+<entry key="selectAllClass">
+	SELECT 
+	       C.*
+	  FROM CLASS C
+</entry>
+
+<!-- 5. 스터디 기록 등록 -->
+<entry key="insertDailyStudy">
+	INSERT
+	  INTO PLANNER A 
+	(
+	  A.PLAN_DATE	
+	, A.STUDENT_NO
+	, A.STUDY_TIME
+	, A.STUDY_PERFORMANCE
+	, A.CLASS_CODE
+	)
+	VALUES
+	(
+	  SYSDATE
+	, ?
+	, ?
+	, ?
+	, ?
+	)
+</entry>
+
+<!-- 6. 모든 스터디 기록 조회 -->
+<entry key="selectAllPlanner">
+	SELECT
+		  P.*
+	  FROM PLANNER P
+</entry>	
+
+<!-- 6-2. 날짜별 스터디 기록 조회 -->
+<entry key="selectPlannerByDate">
+    SELECT
+           *
+    FROM PLANNER
+  WHERE TO_CHAR(PLAN_DATE, 'YYMMDD') = ?;
+</entry>
+
+<!-- 7. 학생 정보 변경 -->
+<entry key="updateStudentByNo">
+		UPDATE
+		 		STUDENT S
+		   SET S.PHONE = ?
+		 WHERE S.STUDENT_NO = ?
+</entry>
+
+
+<!-- 8. 학생 정보 삭제 -->
+<entry key="deleteStudentByNo">
+        DELETE
+          FROM STUDENT S
+         WHERE S.STUDENT_NO = ?
+</entry>
+</properties>
